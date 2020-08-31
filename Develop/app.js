@@ -190,6 +190,16 @@ function renderTeam(){
     let teamHTML = render(Team);
     console.log("Team is type of:" + typeof(Team));
     console.log(teamHTML);
+    fs.writeFile(outputPath, teamHTML, function (err) {
+
+        if (err) {
+            return console.log(err);
+        }
+
+        console.log("Success!");
+
+    });
+
     teamMaker();
 }
 
