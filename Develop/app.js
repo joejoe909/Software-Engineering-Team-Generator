@@ -33,3 +33,172 @@ const render = require("./lib/htmlRenderer");
 // for further information. Be sure to test out each class and verify it generates an
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
+let mainMenu = [
+    {
+        type: "list",
+        name: "MainMenu",
+        message: "What would you like to do?",
+        choices: ['Create_Team', 'Exit'],
+    },
+
+];
+
+let addEmployees = [
+    {
+        type: "list",
+        name: "addEdit",
+        message: "Add/Edit Employess - What would you like to do",
+        choices: ["Add a Manager", "Add a Engineer", "Add a Intern","Render a Team List", "Go Back to Main Menu"]
+
+    }
+
+];
+
+addManager = () => {
+    const addManager = [
+        {
+            type: 'input',
+            name: 'mgrName',
+            message: 'What is the Manager\'s Name?',
+        },
+        { 
+            type: 'input',
+            name: 'id',
+            message: 'Please enter the ID.',
+            validate: function (value) {
+                var valid = !isNaN(parseFloat(value));
+                return valid || 'Please enter a number';
+            },
+            filter: Number,
+        },
+        {
+            type: 'input',
+            name: 'mgrEmail',
+            message: 'What is the Manager\'s Email?',
+        },
+        {
+            type: 'input',
+            name: 'officeNumber',
+            message: 'Please enter the Manager\'s office number.',
+            validate: function (value) {
+                var valid = !isNaN(parseFloat(value));
+                return valid || 'Please enter a number';
+            },
+            filter: Number,
+        }
+    ]
+
+    inquirer.prompt(addManager).then((aManagerObj) => {
+       const {mgrName, id, mgrEmail, officeNumber} = aManagerObj;
+       let ManagerToAdd = new Manager(mgrName, id, mgrEmail, officeNumber);
+
+        
+    });
+
+
+}
+
+addEngineer = () => {
+    const addEngineer = [
+        {
+            type: 'input',
+            name: 'engName',
+            message: 'What is the Engineer\'s Name?',
+        },
+        {
+            type: 'input',
+            name: 'id',
+            message: 'Please enter the ID.',
+            validate: function (value) {
+                var valid = !isNaN(parseFloat(value));
+                return valid || 'Please enter a number';
+            },
+            filter: Number,
+        },
+        {
+            type: 'input',
+            name: 'engEmail',
+            message: 'What is the Engineer\'s Email?',
+        },
+        {
+            type: 'input',
+            name: 'GitHubUser',
+            message: 'Please enter the Engineer\'s GitHub user name.',
+        }
+    ]
+
+    inquirer.prompt(addEngineer).then((aEngineerObj) => {
+        const { engName, id, engEmail, GitHubUser } = aEngineerObj;
+        let EngineerToAdd = new Engineer(engName, id, engEmail, GitHubUser);
+    });
+}
+
+addIntern = () => {
+    const addIntern = [
+        {
+            type: 'input',
+            name: 'intrnName',
+            message: 'What is the Intern\'s Name?',
+        },
+        {
+            type: 'input',
+            name: 'id',
+            message: 'Please enter the ID.',
+            validate: function (value) {
+                var valid = !isNaN(parseFloat(value));
+                return valid || 'Please enter a number';
+            },
+            filter: Number,
+        },
+        {
+            type: 'input',
+            name: 'intrnEmail',
+            message: 'What is the Intern\'s Email?',
+        },
+        {
+            type: 'input',
+            name: 'school',
+            message: 'What school did the intern attend?',
+        }
+    ]
+
+    inquirer.prompt(addIntern).then((aInternObj) => {
+        const { engName, id, engEmail, GitHubUser } = aEngineerObj;
+        let EngineerToAdd = new Intern(engName, id, engEmail, GitHubUser);
+    });
+}
+
+renderTeam=()=>{}
+
+
+function teamMaker() {
+    inquirer.prompt(addEmployees).then((answer) => {
+        const choice = answer.addEdit;
+        console.log(choice + " is type of " + typeof (choice));
+        if (choice.includes("Add a Manager")) {
+            addManager();
+        } else if (choice.includes("Add a Engineer")) {
+            addEngineer();
+        } else if (choice.includes("Add a Intern")) {
+            addInter();
+        }else if(choice.includes("Render a Team List.")){
+            renderTeam();
+        } else if (choice.includes("Go Back to Main Menu")) {
+            init();
+        }
+    });
+}
+
+function init() {
+    inquirer.prompt(mainMenu).then((answer) => {
+        const choice = answer.MainMenu;
+        console.log(choice + " is type of " + typeof (choice));
+        if (choice.includes("Create_Team")) {
+            teamMaker();
+        } else {
+            console.log("Exiting....")
+        }
+    });
+}
+let currentPrompt = mainMenu;
+init();
