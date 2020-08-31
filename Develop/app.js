@@ -9,6 +9,10 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
+const Employee = require("./lib/Employee");
+const { type } = require("os");
+const Team = [];
+
 
 
 // Write code to use inquirer to gather information about the development team members,
@@ -91,8 +95,11 @@ addManager = () => {
     inquirer.prompt(addManager).then((aManagerObj) => {
        const {mgrName, id, mgrEmail, officeNumber} = aManagerObj;
        let ManagerToAdd = new Manager(mgrName, id, mgrEmail, officeNumber);
-
-        
+        console.log(ManagerToAdd);
+        Team.push(ManagerToAdd);
+        console.log(Team);
+        console.log("manger is type of" + typeof(ManagerToAdd));
+        teamMaker();
     });
 
 
@@ -130,6 +137,10 @@ addEngineer = () => {
     inquirer.prompt(addEngineer).then((aEngineerObj) => {
         const { engName, id, engEmail, GitHubUser } = aEngineerObj;
         let EngineerToAdd = new Engineer(engName, id, engEmail, GitHubUser);
+        console.log(EngineerToAdd);
+        Team.push(EngineerToAdd);
+        console.log(Team);
+        teamMaker();
     });
 }
 
@@ -163,25 +174,36 @@ addIntern = () => {
     ]
 
     inquirer.prompt(addIntern).then((aInternObj) => {
-        const { engName, id, engEmail, GitHubUser } = aEngineerObj;
-        let EngineerToAdd = new Intern(engName, id, engEmail, GitHubUser);
+        const { intrnName, id, intrnEmail, school } = aInternObj;
+        let InternToAdd = new Intern(intrnName, id, intrnEmail, school);
+        console.log(InternToAdd);
+        Team.push(InternToAdd);
+        console.log(Team);
+        teamMaker();
     });
 }
 
-renderTeam=()=>{}
+function renderTeam(){
+    console.log("renderTeam function called");
+    console.log("Team is type of:" + typeof(Team));
+    console.log("rendering team....");
+    let teamHTML = render(Team);
+    console.log("Team is type of:" + typeof(Team));
+    console.log(teamHTML);
+    teamMaker();
+}
 
 
 function teamMaker() {
     inquirer.prompt(addEmployees).then((answer) => {
         const choice = answer.addEdit;
-        console.log(choice + " is type of " + typeof (choice));
         if (choice.includes("Add a Manager")) {
             addManager();
         } else if (choice.includes("Add a Engineer")) {
             addEngineer();
         } else if (choice.includes("Add a Intern")) {
-            addInter();
-        }else if(choice.includes("Render a Team List.")){
+            addIntern();
+        } else if (choice.includes("Render a Team List")){
             renderTeam();
         } else if (choice.includes("Go Back to Main Menu")) {
             init();
