@@ -13,30 +13,6 @@ const Employee = require("./lib/Employee");
 const { type } = require("os");
 const Team = [];
 
-
-
-// Write code to use inquirer to gather information about the development team members,
-// and to create objects for each team member (using the correct classes as blueprints!)
-
-// After the user has input all employees desired, call the `render` function (required
-// above) and pass in an array containing all employee objects; the `render` function will
-// generate and return a block of HTML including templated divs for each employee!
-
-// After you have your html, you're now ready to create an HTML file using the HTML
-// returned from the `render` function. Now write it to a file named `team.html` in the
-// `output` folder. You can use the variable `outputPath` above target this location.
-// Hint: you may need to check if the `output` folder exists and create it if it
-// does not.
-
-// HINT: each employee type (manager, engineer, or intern) has slightly different
-// information; write your code to ask different questions via inquirer depending on
-// employee type.
-
-// HINT: make sure to build out your classes first! Remember that your Manager, Engineer,
-// and Intern classes should all extend from a class named Employee; see the directions
-// for further information. Be sure to test out each class and verify it generates an
-// object with the correct structure and methods. This structure will be crucial in order
-// for the provided `render` function to work! ```
 let mainMenu = [
     {
         type: "list",
@@ -196,7 +172,7 @@ function renderTeam(){
             return console.log(err);
         }
 
-        console.log("Success!");
+        console.log("....................successfully write to output...................");
 
     });
 
@@ -207,16 +183,25 @@ function renderTeam(){
 function teamMaker() {
     inquirer.prompt(addEmployees).then((answer) => {
         const choice = answer.addEdit;
-        if (choice.includes("Add a Manager")) {
-            addManager();
-        } else if (choice.includes("Add a Engineer")) {
-            addEngineer();
-        } else if (choice.includes("Add a Intern")) {
-            addIntern();
-        } else if (choice.includes("Render a Team List")){
-            renderTeam();
-        } else if (choice.includes("Go Back to Main Menu")) {
-            init();
+        switch(choice){
+            case "Add a Manager":
+                addManager();
+                break;
+            case "Add a Engineer":
+                addEngineer();
+                break;
+            case "Add a Intern":
+                addIntern();
+                break;
+            case "Render a Team List":
+                renderTeam();
+                break;
+            case "Go Back to Main Menu":
+                init();     
+                break;
+            default:
+                init();
+                break;           
         }
     });
 }
