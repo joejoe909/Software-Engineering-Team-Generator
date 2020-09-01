@@ -1,7 +1,5 @@
 # Software-Engineering-Team-Generator
 
-
-
 ## Description
 
 The Software Engineering Team Generator lets you enter you enter the details of the people in your team so that you have single goto spot to verify thier details. Currently it supports a manager an engineer and interns more can be added simply templating the code. You can learn more by watching the video <a href = "https://www.youtube.com/watch?v=ElrCoqf96No"> here</a>
@@ -81,6 +79,8 @@ function teamMaker() {
 }
 ```
 As you can see each function calls a new menu each which allows the user to navigate to diffrent menus. 
+
+<img src = "./img/inside the menu.gif">
 
 ## Questions
 
