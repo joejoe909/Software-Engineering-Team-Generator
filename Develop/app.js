@@ -160,30 +160,21 @@ addIntern = () => {
 }
 
 function renderTeam(){
-    console.log("renderTeam function called");
-    console.log("Team is type of:" + typeof(Team));
     console.log("rendering team....");
     let teamHTML = render(Team);
-    console.log("Team is type of:" + typeof(Team));
-    console.log(teamHTML);
     fs.writeFile(outputPath, teamHTML, function (err) {
-
         if (err) {
             return console.log(err);
         }
-
-        console.log("....................successfully write to output...................");
-
+        console.log("....................successfully wrote to output...................");
     });
 
     teamMaker();
 }
 
-
 function teamMaker() {
     inquirer.prompt(addEmployees).then((answer) => {
-        const choice = answer.addEdit;
-        switch(choice){
+        switch(answer.addEdit){
             case "Add a Manager":
                 addManager();
                 break;
@@ -208,9 +199,7 @@ function teamMaker() {
 
 function init() {
     inquirer.prompt(mainMenu).then((answer) => {
-        const choice = answer.MainMenu;
-        console.log(choice + " is type of " + typeof (choice));
-        if (choice.includes("Create_Team")) {
+        if (answer.MainMenu === "Create_Team") {
             teamMaker();
         } else {
             console.log("Exiting....")
