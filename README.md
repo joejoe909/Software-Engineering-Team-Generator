@@ -1,10 +1,10 @@
 # Software-Engineering-Team-Generator
 
-<img href = "./img/tm.png">
+
 
 ## Description
 
-The Software Engineering Team Generator lets you enter you enter the details of the people in your team so that you have single goto spot to verify thier details. Currently it supports a manager an engineer and interns more can be added simply templating the code. 
+The Software Engineering Team Generator lets you enter you enter the details of the people in your team so that you have single goto spot to verify thier details. Currently it supports a manager an engineer and interns more can be added simply templating the code. You can learn more by watching the video <a href = "https://studio.youtube.com/video/ZzozOdS1iZw/edit/basic"> here</a>
 
      
   - [Description](#description)
@@ -22,7 +22,8 @@ You need Node.JS, to perform Test Driven Development you'll need jest. You also 
 
 ## Usage
 
-The SETG app can be used to construct a HTML file that will display the team members you enter into it.
+The SETG app can be used to construct a HTML file that will display the team members you enter into it. Below you can see the final result.
+<img src = "./img/mt.png">
 
 ## Questions
 
